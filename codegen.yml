@@ -1,0 +1,11 @@
+schema:
+  - 'http://127.0.0.1:8000/graphql/'  # Адрес вашего GraphQL сервера или локальный файл схемы
+documents:
+  - './src/hooks/**/*.ts'
+
+generates:
+  ./src/generated/graphql.tsx:
+    plugins:
+      - 'typescript'  # Генерация типов TypeScript для схемы
+      - 'typescript-operations'  # Генерация типов для запросов/мутаций
+      - 'typescript-react-apollo'  # Генерация хука для использования с Apollo Client
