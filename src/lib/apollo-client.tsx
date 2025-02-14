@@ -1,6 +1,6 @@
 "use client"
 
-import { ApolloClient, createHttpLink, InMemoryCache, ApolloProvider } from '@apollo/client';
+import { ApolloClient, createHttpLink, InMemoryCache, ApolloProvider as ApolloProviderComponent } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import { ReactNode } from "react";
 
@@ -24,5 +24,5 @@ export default function CustomApolloProvider({ children }: { children: ReactNode
       cache: new InMemoryCache()
     });
 
-    return <ApolloProvider client={client}>{children}</ApolloProvider>
-}
+    return <ApolloProviderComponent client={client}>{children}</ApolloProviderComponent>
+} 

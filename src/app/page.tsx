@@ -1,9 +1,35 @@
+import ButtonUI from "@/ui/Button";
+import InputUI from "@/ui/Input";
+import Image from "next/image";
+import Link from "next/link";
+
 export default function Home() {
-  return <div className="mx-auto max-w-7xl">
-    <div>
-      <h1 className="font-bold text-4xl">Что-то супер интересное</h1>
-      <h3 className="text-lg text-black/80">Это тоже интересное, но немного меньше и длиннее</h3>
-      <button className="bg-indigo-600 text-white px-4 py-2 rounded-md">Кнопка действия</button>
+  return <div className="space-y-8">
+    <div className="h-[60svh] flex flex-col justify-center">
+      <div className="flex justify-between items-center">
+        <div className="space-y-3">
+          <h1 className="font-bold text-4xl">Книга памяти<br/>Оренбургской области</h1>
+          <h3 className="text-xl text-black/80">Никто не забыт, ничто не забыто</h3>
+          <button className="bg-indigo-600 text-white px-4 py-2 rounded-md mt-3">Открыть книгу</button>
+        </div>
+        <div>
+          <Image src="/banner.jpg" alt='' className="rounded-2xl" width={600} height={600}/>
+        </div>
+      </div>
     </div>
-  </div>
+    <div>
+      <Link href={'/map'} className="relative group/item">
+        <h3 className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white bg-black/30 p-3 rounded-xl backdrop-blur-2xl font-bold text-4xl z-30">Перейти на интерактивную карту</h3>
+        <img src="https://oren.ru/wp-content/uploads/2017/07/Screenshot_2-2.jpg" alt="" className="w-full object-cover h-[250px] rounded-2xl duration-150 group-hover/item:blur-xs active:scale-90"/>
+      </Link>
+    </div>
+    <div className="mx-auto max-w-screen-xl bg-white text-black px-8 py-8 rounded-xl grid grid-cols-[35%_65%]" id="form-find">
+      <h3 className="text-4xl font-medium">Найти своего<br/>героя</h3>
+      <div className="space-y-3">
+        <InputUI title="Имя"/>
+        <InputUI title="Фамилия"/>
+        <ButtonUI text="Поиск" className="mt-3"/>
+      </div>
+    </div>
+    </div>
 }
