@@ -15,16 +15,46 @@ export type Scalars = {
   Boolean: { input: boolean; output: boolean; }
   Int: { input: number; output: number; }
   Float: { input: number; output: number; }
+  Date: { input: any; output: any; }
   DateTime: { input: any; output: any; }
   GenericScalar: { input: any; output: any; }
 };
 
+export type ArmedConflictType = {
+  __typename?: 'ArmedConflictType';
+  id: Scalars['ID']['output'];
+  personSet: Array<PersonType>;
+  title: Scalars['String']['output'];
+};
+
+export type CreatePerson = {
+  __typename?: 'CreatePerson';
+  person?: Maybe<PersonType>;
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
+  createPerson?: Maybe<CreatePerson>;
   refreshToken?: Maybe<Refresh>;
   registerUser?: Maybe<RegisterUser>;
   tokenAuth?: Maybe<ObtainToken>;
   verifyToken?: Maybe<Verify>;
+};
+
+
+export type MutationCreatePersonArgs = {
+  awards: Scalars['String']['input'];
+  biographyFacts?: InputMaybe<Scalars['String']['input']>;
+  burialPlace: Scalars['String']['input'];
+  conflictsParticipated?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
+  dateOfBirth: Scalars['Date']['input'];
+  dateOfDeath: Scalars['Date']['input'];
+  firstName: Scalars['String']['input'];
+  lastName: Scalars['String']['input'];
+  middleName?: InputMaybe<Scalars['String']['input']>;
+  militaryCommissariat: Scalars['String']['input'];
+  militaryRank: Scalars['String']['input'];
+  placeOfBirth: Scalars['String']['input'];
 };
 
 
@@ -57,6 +87,23 @@ export type ObtainToken = {
   user?: Maybe<UserType>;
 };
 
+export type PersonType = {
+  __typename?: 'PersonType';
+  awards: Scalars['String']['output'];
+  biographyFacts?: Maybe<Scalars['String']['output']>;
+  burialPlace: Scalars['String']['output'];
+  conflictsParticipated: Array<ArmedConflictType>;
+  dateOfBirth: Scalars['Date']['output'];
+  dateOfDeath: Scalars['Date']['output'];
+  firstName: Scalars['String']['output'];
+  id: Scalars['ID']['output'];
+  lastName: Scalars['String']['output'];
+  middleName?: Maybe<Scalars['String']['output']>;
+  militaryCommissariat: Scalars['String']['output'];
+  militaryRank: Scalars['String']['output'];
+  placeOfBirth: Scalars['String']['output'];
+};
+
 export type Query = {
   __typename?: 'Query';
   hello?: Maybe<Scalars['String']['output']>;
@@ -81,16 +128,16 @@ export type UserType = {
   email: Scalars['String']['output'];
   firstName: Scalars['String']['output'];
   id: Scalars['ID']['output'];
-  /** Designates whether this user should be treated as active. Unselect this instead of deleting accounts. */
+  /** Отметьте, если пользователь должен считаться активным. Уберите эту отметку вместо удаления учётной записи. */
   isActive: Scalars['Boolean']['output'];
-  /** Designates whether the user can log into this admin site. */
+  /** Отметьте, если пользователь может входить в административную часть сайта. */
   isStaff: Scalars['Boolean']['output'];
-  /** Designates that this user has all permissions without explicitly assigning them. */
+  /** Указывает, что пользователь имеет все права без явного их назначения. */
   isSuperuser: Scalars['Boolean']['output'];
   lastLogin?: Maybe<Scalars['DateTime']['output']>;
   lastName: Scalars['String']['output'];
   password: Scalars['String']['output'];
-  /** Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only. */
+  /** Обязательное поле. Не более 150 символов. Только буквы, цифры и символы @/./+/-/_. */
   username: Scalars['String']['output'];
 };
 
@@ -114,6 +161,24 @@ export type AuthRegisterMutationVariables = Exact<{
 
 
 export type AuthRegisterMutation = { __typename?: 'Mutation', registerUser?: { __typename?: 'RegisterUser', token?: string | null, user?: { __typename?: 'UserType', id: string, username: string, email: string } | null } | null };
+
+export type CreatePersonMutationVariables = Exact<{
+  last_name: Scalars['String']['input'];
+  first_name: Scalars['String']['input'];
+  middle_name?: InputMaybe<Scalars['String']['input']>;
+  date_of_birth: Scalars['Date']['input'];
+  place_of_birth: Scalars['String']['input'];
+  military_commissariat: Scalars['String']['input'];
+  military_rank: Scalars['String']['input'];
+  conflicts_participated: Array<InputMaybe<Scalars['Int']['input']>> | InputMaybe<Scalars['Int']['input']>;
+  awards: Scalars['String']['input'];
+  date_of_death: Scalars['Date']['input'];
+  burial_place: Scalars['String']['input'];
+  biography_facts?: InputMaybe<Scalars['String']['input']>;
+}>;
+
+
+export type CreatePersonMutation = { __typename?: 'Mutation', createPerson?: { __typename?: 'CreatePerson', person?: { __typename?: 'PersonType', id: string, lastName: string, firstName: string, middleName?: string | null, dateOfBirth: any, placeOfBirth: string, militaryCommissariat: string, militaryRank: string, awards: string, dateOfDeath: any, burialPlace: string, biographyFacts?: string | null, conflictsParticipated: Array<{ __typename?: 'ArmedConflictType', id: string, title: string }> } | null } | null };
 
 
 export const AuthLoginDocument = gql`
@@ -194,3 +259,77 @@ export function useAuthRegisterMutation(baseOptions?: Apollo.MutationHookOptions
 export type AuthRegisterMutationHookResult = ReturnType<typeof useAuthRegisterMutation>;
 export type AuthRegisterMutationResult = Apollo.MutationResult<AuthRegisterMutation>;
 export type AuthRegisterMutationOptions = Apollo.BaseMutationOptions<AuthRegisterMutation, AuthRegisterMutationVariables>;
+export const CreatePersonDocument = gql`
+    mutation CreatePerson($last_name: String!, $first_name: String!, $middle_name: String, $date_of_birth: Date!, $place_of_birth: String!, $military_commissariat: String!, $military_rank: String!, $conflicts_participated: [Int]!, $awards: String!, $date_of_death: Date!, $burial_place: String!, $biography_facts: String) {
+  createPerson(
+    lastName: $last_name
+    firstName: $first_name
+    middleName: $middle_name
+    dateOfBirth: $date_of_birth
+    placeOfBirth: $place_of_birth
+    militaryCommissariat: $military_commissariat
+    militaryRank: $military_rank
+    conflictsParticipated: $conflicts_participated
+    awards: $awards
+    dateOfDeath: $date_of_death
+    burialPlace: $burial_place
+    biographyFacts: $biography_facts
+  ) {
+    person {
+      id
+      lastName
+      firstName
+      middleName
+      dateOfBirth
+      placeOfBirth
+      militaryCommissariat
+      militaryRank
+      conflictsParticipated {
+        id
+        title
+      }
+      awards
+      dateOfDeath
+      burialPlace
+      biographyFacts
+    }
+  }
+}
+    `;
+export type CreatePersonMutationFn = Apollo.MutationFunction<CreatePersonMutation, CreatePersonMutationVariables>;
+
+/**
+ * __useCreatePersonMutation__
+ *
+ * To run a mutation, you first call `useCreatePersonMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreatePersonMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createPersonMutation, { data, loading, error }] = useCreatePersonMutation({
+ *   variables: {
+ *      last_name: // value for 'last_name'
+ *      first_name: // value for 'first_name'
+ *      middle_name: // value for 'middle_name'
+ *      date_of_birth: // value for 'date_of_birth'
+ *      place_of_birth: // value for 'place_of_birth'
+ *      military_commissariat: // value for 'military_commissariat'
+ *      military_rank: // value for 'military_rank'
+ *      conflicts_participated: // value for 'conflicts_participated'
+ *      awards: // value for 'awards'
+ *      date_of_death: // value for 'date_of_death'
+ *      burial_place: // value for 'burial_place'
+ *      biography_facts: // value for 'biography_facts'
+ *   },
+ * });
+ */
+export function useCreatePersonMutation(baseOptions?: Apollo.MutationHookOptions<CreatePersonMutation, CreatePersonMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreatePersonMutation, CreatePersonMutationVariables>(CreatePersonDocument, options);
+      }
+export type CreatePersonMutationHookResult = ReturnType<typeof useCreatePersonMutation>;
+export type CreatePersonMutationResult = Apollo.MutationResult<CreatePersonMutation>;
+export type CreatePersonMutationOptions = Apollo.BaseMutationOptions<CreatePersonMutation, CreatePersonMutationVariables>;

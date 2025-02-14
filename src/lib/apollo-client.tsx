@@ -6,11 +6,11 @@ import { ReactNode } from "react";
 
 export default function CustomApolloProvider({ children }: { children: ReactNode }) {
     const httpLink = createHttpLink({
-      uri: 'http://localhost:8000/graphql/',
+      uri: 'http://localhost:8000/backend/graphql/',
     });
     
     const authLink = setContext((_, { headers }) => {
-      const token = localStorage.getItem('token');
+      const token = typeof window !== 'undefined' && localStorage.getItem('token');
       return {
         headers: {
           ...headers,

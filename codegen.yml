@@ -1,5 +1,5 @@
 schema:
-  - 'http://127.0.0.1:8000/graphql/'  # Адрес вашего GraphQL сервера или локальный файл схемы
+  - 'http://127.0.0.1:8000/backend/graphql/'  # Адрес вашего GraphQL сервера или локальный файл схемы
 documents:
   - './src/hooks/**/*.ts'
 
