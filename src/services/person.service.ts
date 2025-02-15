@@ -13,18 +13,21 @@ class PersonService {
         return <IPerson>(await axiosClassic.post(`${this.BASE_URL}create/`, person)).data
     }
 
-    async update(personId: number, person: IPerson) {
+    async update(personId: number, person: IPerson): Promise<IPerson> {
         return <IPerson>(await axiosClassic.patch(`${this.BASE_URL}update/${personId}/`, person)).data
     }
 
-    async update_file(personId: number, name: string, file: File) {
+    async update_file(personId: number, name: string, file: File): Promise<IPerson> {
         var formData = new FormData();
         formData.append(name, file);
         return <IPerson>(await axiosClassic.patch(`${this.BASE_URL}update/${personId}/`, formData, {headers: {
             'Content-Type': 'multipart/form-data'
         }})).data
     }
-    
+
+    async filterList(data: any): Promise<IPerson[]> {
+        return <IPerson[]>(await axiosClassic.post(`${this.BASE_URL}find/`, data)).data
+    }
 
     async armedConflictsList(): Promise<IArmedConflictsList> {
         return <IArmedConflictsList>(await axiosClassic.get(`${this.BASE_URL}armed_conflicts_list/`)).data

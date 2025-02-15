@@ -5,6 +5,8 @@ import ButtonUI from "@/ui/Button"
 import InputUi from "@/ui/Input"
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import personService from "@/services/person.service";
+import { IPerson } from "@/interfaces/Person.interface";
 
 type FormValues = {
     last_name: string
@@ -22,10 +24,11 @@ type FormValues = {
 
 }
 
-export default function SelectForm() {
+export default function SelectForm({personList, setPersonList}: {personList: IPerson[], setPersonList: any}) {
     const controls = useAnimation();
     const [openFilter, setOpenFilter] = useState(true)
-    const { register, handleSubmit, reset } = useForm<FormValues>()
+    const { register, handleSubmit, reset, getValues } = useForm<FormValues>()
+    const [loading, setLoading] = useState(false)
 
     useEffect(() => {
         controls.start({ height: "auto", opacity: 1 });
@@ -33,8 +36,12 @@ export default function SelectForm() {
         controls.start({ height: "auto", opacity: 1 });
     }, [openFilter]);
 
-    const click = (data: FormValues) => {
+    const click = async (data: FormValues) => {
         console.log(data)
+        setLoading(true)
+        const result = await personService.filterList(data)
+        setPersonList(result)
+        setLoading(false)
     }
 
     return <form onSubmit={handleSubmit(click)}>
@@ -79,7 +86,11 @@ export default function SelectForm() {
             <ButtonUI text="Сбросить" className="w-full" theme="outline" Icon={<IoCloseOutline className="w-5 h-5" />} onClick={() => reset()}/>
         </div>
         <div>
-            <ButtonUI text="Найдено ~ 100 человек" className="w-full"/>
+            {loading ? 
+                <ButtonUI text={`Загрузка...`} loading={true} className="w-full"/>
+            :
+                <ButtonUI text={`Найдено ~ ${personList.length} человек`} className="w-full"/>
+            }
         </div>
     </div>
 </form>

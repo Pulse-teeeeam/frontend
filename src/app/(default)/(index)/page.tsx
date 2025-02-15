@@ -2,6 +2,8 @@ import ButtonUI from "@/ui/Button";
 import InputUI from "@/ui/Input";
 import Image from "next/image";
 import Link from "next/link";
+import PersonCount from "./components/PersonCount";
+import MovingText from "./components/MovingText";
 
 export default function Home() {
   return <div className="space-y-8">
@@ -36,16 +38,7 @@ export default function Home() {
         <ButtonUI text="Поиск" className="mt-3 w-full"/>
       </div>
     </div>
-    <div>
-      <h3 className="text-4xl font-medium mb-6 text-center md:text-left md:mb-0">Последние записи</h3>
-      <div>
-        <div className="">
-          <img src="http://s3.timeweb.cloud/42d8bf36-047de542-227f-4fc0-ab34-af47e3d49b7e/photos/yuio10.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=8NG38OE6JC6G4WQPR5BX%2F20250215%2Fru-1%2Fs3%2Faws4_request&X-Amz-Date=20250215T143800Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=3fe435c1a99bbc0bfd2b885ac5e0a5d0d7b7c676f436ea0654f8742d21151944"/>
-        </div>
-      </div>
-    </div>
-    <div className="font-medium text-center text-3xl">
-      В книге запечатлено уже более <span className="font-bold bg-white py-1 px-2 rounded-xl ring-1 ring-inset ring-zinc-200">10</span> бойцов
-    </div>
+    <MovingText/>
+    <PersonCount/>
     </div>
 }
