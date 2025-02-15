@@ -8,12 +8,13 @@ export default function Header() {
         <div className="ml-2">HistoryLib</div>
     </Link>
     <div className="flex  gap-3">
-      <Link href="/" className="hover:text-black/60 transition duration-200 ease-in-out">Книга</Link>
-      <Link href="/" className="hover:text-black/60 transition duration-200 ease-in-out">Информация</Link>
-      {typeof window !== 'undefined' && localStorage.getItem('token') ?
+      <Link href="/filter" className="hover:text-black/60 transition duration-200 ease-in-out">Фильтр</Link>
+      <Link href="/sender" className="hover:text-black/60 transition duration-200 ease-in-out">Направить информацию</Link>
+      <Link href="/map" className="font-bold hover:font-bold text-indigo-600 transition duration-200 ease-in-out">Открыть карту</Link>
+      {/* {typeof window !== 'undefined' && localStorage.getItem('token') ?
         <Link href="/panel/profile" className="font-bold hover:font-bold text-indigo-600 transition duration-200 ease-in-out">Мой профиль</Link> :
         <Link href="/auth/login" className="font-bold hover:font-bold text-indigo-600 transition duration-200 ease-in-out">Авторизация</Link>
-      }
+      } */}
     </div>
   </header>
 }

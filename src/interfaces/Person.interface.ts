@@ -1,3 +1,20 @@
+export interface IFile {
+    file: string,
+    title: string,
+    id: number
+}
+
+export interface IArmedConflict {
+    title: string,
+    id: number
+}
+
+export interface IMedal {
+    id: number,
+    title: string,
+    image: string
+}
+
 export interface IPerson {
     id: number;
     last_name: string;
@@ -7,10 +24,11 @@ export interface IPerson {
     place_of_birth: string;
     military_commissariat: string;
     military_rank: string;
-    awards: string;
+    medals: IMedal[];
+    files: IFile[],
     date_of_death: string; // ISO 8601 date format (YYYY-MM-DD)
     burial_place: string;
-    biography_facts?: string | null;
-    conflicts_participated: number[];
+    biography?: string | null;
+    armed_conflict: IArmedConflict;
     photo?: string;
 }

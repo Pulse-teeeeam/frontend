@@ -1,0 +1,11 @@
+@media print {
+    @page {
+      size: 600px 900px;
+    }
+  }
+
+  @media screen {
+    .print-only {
+      display: none;
+    }
+  }
