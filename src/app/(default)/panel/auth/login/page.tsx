@@ -2,7 +2,6 @@
 import authService from "@/services/auth.service";
 import ButtonUI from "@/ui/Button";
 import InputUI from "@/ui/Input";
-import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 

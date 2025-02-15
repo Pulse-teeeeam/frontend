@@ -47,8 +47,8 @@ export default function SelectForm() {
     >
         {openFilter ? 
             <div className="flex flex-col md:grid grid-cols-3 md:flex-row bg-white px-5 py-5 rounded-xl my-3 gap-5">
-                <InputUi placeholder="Иванов" title="Имя" func={register('first_name')}/>
                 <InputUi placeholder="Иванов" title="Фамилия" func={register('last_name')}/>
+                <InputUi placeholder="Иванов" title="Имя" func={register('first_name')}/>
                 <InputUi placeholder="Иванов" title="Отчество" func={register('middle_name')}/>
             </div>
         :

@@ -29,6 +29,11 @@ export interface IPerson {
     date_of_death: string; // ISO 8601 date format (YYYY-MM-DD)
     burial_place: string;
     biography?: string | null;
-    armed_conflict: IArmedConflict;
+    armed_conflict: IArmedConflict | number;
     photo?: string;
+}
+
+export interface IArmedConflictsList {
+    title: string
+    id: number
 }

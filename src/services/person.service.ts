@@ -1,6 +1,6 @@
 'use client'
 import { axiosClassic } from "@/api/interceptors"
-import { IPerson } from "@/interfaces/Person.interface"
+import { IArmedConflictsList, IPerson } from "@/interfaces/Person.interface"
 
 class PersonService {
     private BASE_URL = '/person/'
@@ -11,6 +11,24 @@ class PersonService {
 
     async create(person: IPerson): Promise<IPerson> {
         return <IPerson>(await axiosClassic.post(`${this.BASE_URL}create/`, person)).data
+    }
+
+    async update(personId: number, person: IPerson) {
+        return <IPerson>(await axiosClassic.put(`${this.BASE_URL}update/${personId}/`, person)).data
+    }
+
+    async update_file(personId: number, file: File) {
+        var formData = new FormData();
+        formData.append("photo", file);
+
+        return <IPerson>(await axiosClassic.patch(`${this.BASE_URL}update/${personId}/`, formData, {headers: {
+            'Content-Type': 'multipart/form-data'
+        }})).data
+    }
+    
+
+    async armedConflictsList(): Promise<IArmedConflictsList> {
+        return <IArmedConflictsList>(await axiosClassic.get(`${this.BASE_URL}armed_conflicts_list/`)).data
     }
 }
 

@@ -6,16 +6,14 @@ import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import Print from "./components/print";
 import useIsAuth from "@/lib/useIsAuth";
-import SelectUi from "@/ui/Select";
 
 export default function PagePersonPost({ person }: { person: IPerson }) {
     const { data } = useQuery({queryKey: ['person', person.id], queryFn: () => personService.getDetail(person.id), initialData: person})
     const is_auth = useIsAuth()
 
     return <div className="mt-10 space-y-6">
-        <SelectUi title='Aasd'/>
         <div className="flex flex-col md:flex-row items-center">
-            <img src={data.photo} className="w-[150px]"/>
+            {data.photo && <img src={data.photo} className="w-[150px]"/>}
             <div className="ml-3 mt-4 md:mt-0">
                 <h1 className="font-bold text-3xl">{data.first_name} {data.last_name} {data.middle_name}</h1>
                 <div className="font-medium text-xl">{data.date_of_birth.replaceAll('-', '.')} — {data.date_of_death.replaceAll('-', '.')}</div>
@@ -28,17 +26,19 @@ export default function PagePersonPost({ person }: { person: IPerson }) {
             </div>
         </div>
         <div className="space-y-3">
-            <div className="p-5 bg-white rounded-xl ring-1 ring-inset ring-zinc-200">
-                <h3 className="font-bold text-2xl">Медали</h3>
-                <div className="flex gap-3 mt-6">
-                    {data.medals.map((medal) => 
-                        <div className="bg-zinc-50 p-4 rounded-xl flex flex-col items-center" key={medal.id}>
-                            <img className="h-42" src={medal.image} alt={medal.title}/>
-                            <div className="mt-3 font-bold">{medal.title}</div>
-                        </div>
-                    )}
+            {data.medals.length != 0 &&
+                <div className="p-5 bg-white rounded-xl ring-1 ring-inset ring-zinc-200">
+                    <h3 className="font-bold text-2xl">Медали</h3>
+                    <div className="flex gap-3 mt-6">
+                        {data.medals.map((medal) => 
+                            <div className="bg-zinc-50 p-4 rounded-xl flex flex-col items-center" key={medal.id}>
+                                <img className="h-42" src={medal.image} alt={medal.title}/>
+                                <div className="mt-3 font-bold">{medal.title}</div>
+                            </div>
+                        )}
+                    </div>
                 </div>
-            </div>
+            }
             <div className="p-5 bg-white rounded-xl ring-1 ring-inset ring-zinc-200">
                 <h3 className="font-bold text-2xl">Информация</h3>
                 <div className="mt-1">
