@@ -14,13 +14,12 @@ class PersonService {
     }
 
     async update(personId: number, person: IPerson) {
-        return <IPerson>(await axiosClassic.put(`${this.BASE_URL}update/${personId}/`, person)).data
+        return <IPerson>(await axiosClassic.patch(`${this.BASE_URL}update/${personId}/`, person)).data
     }
 
-    async update_file(personId: number, file: File) {
+    async update_file(personId: number, name: string, file: File) {
         var formData = new FormData();
-        formData.append("photo", file);
-
+        formData.append(name, file);
         return <IPerson>(await axiosClassic.patch(`${this.BASE_URL}update/${personId}/`, formData, {headers: {
             'Content-Type': 'multipart/form-data'
         }})).data

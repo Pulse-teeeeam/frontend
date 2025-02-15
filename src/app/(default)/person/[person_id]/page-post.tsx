@@ -8,7 +8,7 @@ import Print from "./components/print";
 import useIsAuth from "@/lib/useIsAuth";
 
 export default function PagePersonPost({ person }: { person: IPerson }) {
-    const { data } = useQuery({queryKey: ['person', person.id], queryFn: () => personService.getDetail(person.id), initialData: person})
+    const { data } = useQuery({queryKey: ['person', Number(person.id)], queryFn: () => personService.getDetail(person.id), initialData: person})
     const is_auth = useIsAuth()
 
     return <div className="mt-10 space-y-6">

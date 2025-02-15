@@ -9,7 +9,7 @@ import Link from "next/link";
 
 
 export default function PageEditPerson({ params }: { params: { person_id: number } }) {
-    const { data } = useQuery({queryKey: ['person_edit', params.person_id], queryFn: () => personService.getDetail(params.person_id)})
+    const { data } = useQuery({queryKey: ['person_edit', Number(params.person_id)], queryFn: () => personService.getDetail(params.person_id)})
     if (!data) return <>Data</>
 
     return <div className="mt-10">
