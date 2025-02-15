@@ -9,7 +9,7 @@ export default function RootLayout({
   return (
     <div className="md:grid min-h-screen grid-rows-[auto_1fr_auto] mx-auto max-w-screen-xl">
         <Header/>
-        <main className="mb-12">
+        <main className="mb-12 px-3 md:p-0">
             {children}
         </main>
         <Footer/>

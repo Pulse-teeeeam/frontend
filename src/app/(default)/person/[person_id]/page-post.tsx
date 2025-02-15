@@ -5,11 +5,15 @@ import ButtonUI from "@/ui/Button";
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import Print from "./components/print";
+import useIsAuth from "@/lib/useIsAuth";
+import SelectUi from "@/ui/Select";
 
 export default function PagePersonPost({ person }: { person: IPerson }) {
     const { data } = useQuery({queryKey: ['person', person.id], queryFn: () => personService.getDetail(person.id), initialData: person})
+    const is_auth = useIsAuth()
 
     return <div className="mt-10 space-y-6">
+        <SelectUi title='Aasd'/>
         <div className="flex flex-col md:flex-row items-center">
             <img src={data.photo} className="w-[150px]"/>
             <div className="ml-3 mt-4 md:mt-0">
@@ -18,8 +22,8 @@ export default function PagePersonPost({ person }: { person: IPerson }) {
                 <div className="font-normal text-xl">Участник <span className="font-medium">{data.armed_conflict.title}</span></div>
                 <div className="mt-3 flex space-x-1">
                     <ButtonUI text="Скачать"/>
-                    <ButtonUI text="Скачать"/>
                     <Print person={data}/>
+                    {is_auth && <ButtonUI href={`/person/${data.id}/edit`} text="Редактировать"/>}
                 </div>
             </div>
         </div>

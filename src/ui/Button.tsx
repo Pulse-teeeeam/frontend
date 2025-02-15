@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { HTMLAttributeAnchorTarget, MouseEventHandler, ReactNode } from "react";
 
 interface ButtonUiProps {

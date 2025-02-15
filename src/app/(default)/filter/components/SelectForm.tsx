@@ -46,27 +46,27 @@ export default function SelectForm() {
         className="overflow-hidden"
     >
         {openFilter ? 
-            <div className="flex flex-col md:flex-row bg-white px-3 py-5 rounded-xl my-3 justify-center gap-5">
+            <div className="flex flex-col md:grid grid-cols-3 md:flex-row bg-white px-5 py-5 rounded-xl my-3 gap-5">
                 <InputUi placeholder="Иванов" title="Имя" func={register('first_name')}/>
                 <InputUi placeholder="Иванов" title="Фамилия" func={register('last_name')}/>
                 <InputUi placeholder="Иванов" title="Отчество" func={register('middle_name')}/>
             </div>
         :
             <div className="grid md:grid-cols-2 gap-3 my-3">
-                <div className="space-y-3 bg-white px-3 py-5 rounded-xl ring-1 ring-inset ring-zinc-200">
+                <div className="space-y-3 bg-white px-5 py-5 rounded-xl ring-1 ring-inset ring-zinc-200">
                     <InputUi placeholder="Иванов" title="Имя" func={register('first_name')}/>
                     <InputUi placeholder="Иванов" title="Фамилия" func={register('last_name')}/>
                     <InputUi placeholder="Иванов" title="Отчество" func={register('middle_name')}/>
                 </div>
-                <div className="space-y-3 bg-white px-3 py-5 rounded-xl ring-1 ring-inset ring-zinc-200">
+                <div className="space-y-3 bg-white px-5 py-5 rounded-xl ring-1 ring-inset ring-zinc-200">
                     <InputUi title='Дата рождения' type='date' func={register('date_of_birth')}/>
                     <InputUi title='Дата смерти' type='date' func={register('date_of_death')}/>
                 </div>
-                <div className="space-y-3 bg-white px-3 py-5 rounded-xl ring-1 ring-inset ring-zinc-200">
+                <div className="space-y-3 bg-white px-5 py-5 rounded-xl ring-1 ring-inset ring-zinc-200">
                     <InputUi placeholder="Введите..." title="Место рождения" func={register('place_of_birth')}/>
                     <InputUi placeholder="Введите..." title="Место захоронения" func={register('burial_place')}/>
                 </div>
-                <div className="space-y-3 bg-white px-3 py-5 rounded-xl ring-1 ring-inset ring-zinc-200">
+                <div className="space-y-3 bg-white px-5 py-5 rounded-xl ring-1 ring-inset ring-zinc-200">
                     <InputUi placeholder="Введите..." title="Воинское звание" func={register('military_rank')}/>
                     <InputUi placeholder="Введите..." title="Военный комиссариат" func={register('military_commissariat')}/>
                 </div>
