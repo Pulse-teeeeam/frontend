@@ -1,7 +1,7 @@
 import SelectForm from "./components/SelectForm";
 
 export default function FilterPage({}) {
-    return <div className="mt-12">
+    return <div className="mt-12 p-1">
         <div>
             <h1 className="font-bold text-3xl">Фильтр</h1>
             <div>Заполнять все поля необязательно</div>

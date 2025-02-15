@@ -2,7 +2,14 @@
 import Link from "next/link";
 
 export default function Header() {
-    return <header className="bg-white rounded-b-xl px-6 py-3 flex justify-between items-center">
+  const logout = () => {
+    localStorage.removeItem('token');
+    window.location.href = '/';
+  }
+
+    return <footer>
+    {typeof window !== 'undefined' && localStorage.getItem('token') && <div className="bg-indigo-600 p-1 text-center font-bold text-white">Вы авторизованы как сотрудник <button onClick={logout} className="ml-2 bg-white text-black hover:text-white hover:bg-black px-2 rounded-md">Выйти</button></div>}
+    <div className="bg-white rounded-b-xl px-6 py-3 flex justify-between items-center">
     <Link href="/" className="font-medium text-lg flex items-center">
         <img src="/logo.svg" alt="LOGO" className="h-10 w-10 duration-150 hover:opacity-90 active:scale-90"/>
         <div className="ml-2">HistoryLib</div>
@@ -16,5 +23,6 @@ export default function Header() {
         <Link href="/auth/login" className="font-bold hover:font-bold text-indigo-600 transition duration-200 ease-in-out">Авторизация</Link>
       } */}
     </div>
-  </header>
+  </div>
+  </footer>
 }
