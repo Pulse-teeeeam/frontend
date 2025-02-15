@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { Toaster } from "sonner";
-import CustomApolloProvider from "@/lib/apollo-client";
+import QueryProvider from "@/lib/ProviderQuery";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -15,12 +15,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ru">
-      <CustomApolloProvider>
-      <Toaster theme="dark" position="top-center"/>
+      <QueryProvider>
+        <Toaster theme="dark" position="top-center"/>
         <body className="bg-zinc-100">
           {children}
         </body>
-      </CustomApolloProvider>
+      </QueryProvider>
     </html>
   );
 }

@@ -1,6 +1,6 @@
 export default function PageMap() {
     return <>
-    <iframe src="https://geois2.orb.ru/resource/8898/display/tiny?base=basemap_0&lon=55.5990&lat=52.4813&angle=0&zoom=7&styles=7986%2C7975%2C2092&linkMainMap=true&events=false&panel=none&controls=&panels=" className="w-full h-full" style={{overflow: 'hidden', height: '600px', width: '800px'}}></iframe>
+    <iframe src="https://geois2.orb.ru/resource/8898/display?base=basemap_0&lon=56.0525&lat=52.3898&angle=0&zoom=9&styles=7986,7975,2092" className="w-screen h-screen md:w-full md:h-full overflow-hidden mt-8 md:rounded-2xl"></iframe>
     </>
 
 }
