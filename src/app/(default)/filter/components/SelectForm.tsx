@@ -7,6 +7,8 @@ import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import personService from "@/services/person.service";
 import { IPerson } from "@/interfaces/Person.interface";
+import { useQuery } from "@tanstack/react-query";
+import SelectUi from "@/ui/Select";
 
 type FormValues = {
     last_name: string
@@ -27,8 +29,9 @@ type FormValues = {
 export default function SelectForm({personList, setPersonList}: {personList: IPerson[], setPersonList: any}) {
     const controls = useAnimation();
     const [openFilter, setOpenFilter] = useState(true)
-    const { register, handleSubmit, reset, getValues } = useForm<FormValues>()
+    const { register, handleSubmit, reset, setValue, getValues } = useForm<FormValues>()
     const [loading, setLoading] = useState(false)
+    const { data: items_data } = useQuery({queryKey: ['TabInformation'], queryFn: () => personService.armedConflictsList()})
 
     useEffect(() => {
         controls.start({ height: "auto", opacity: 1 });
@@ -43,6 +46,10 @@ export default function SelectForm({personList, setPersonList}: {personList: IPe
         setPersonList(result)
         setLoading(false)
     }
+
+    useEffect(() => {
+        click(getValues())
+    }, [])
 
     return <form onSubmit={handleSubmit(click)}>
     <motion.div
@@ -68,6 +75,7 @@ export default function SelectForm({personList, setPersonList}: {personList: IPe
                 <div className="space-y-3 bg-white px-5 py-5 rounded-xl ring-1 ring-inset ring-zinc-200">
                     <InputUi title='Дата рождения' type='date' func={register('date_of_birth')}/>
                     <InputUi title='Дата смерти' type='date' func={register('date_of_death')}/>
+                    <SelectUi items={items_data} title='Военный конфликт' item={null} func={(item: number) => {if (item) {setValue('armed_conflict', item.id)}}}/>
                 </div>
                 <div className="space-y-3 bg-white px-5 py-5 rounded-xl ring-1 ring-inset ring-zinc-200">
                     <InputUi placeholder="Введите..." title="Место рождения" func={register('place_of_birth')}/>

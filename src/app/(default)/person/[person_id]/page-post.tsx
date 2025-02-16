@@ -7,19 +7,22 @@ import React from "react";
 import Print from "./components/print";
 import useIsAuth from "@/lib/useIsAuth";
 
-export default function PagePersonPost({ person }: { person: IPerson }) {
-    const { data } = useQuery({queryKey: ['person', Number(person.id)], queryFn: () => personService.getDetail(person.id), initialData: person})
+
+export default function PagePersonPost({ person, person_id }: { person: IPerson | undefined, person_id: number }) {
+    const { data, error } = useQuery({queryKey: ['person', person_id], queryFn: () => personService.getDetail(person_id), initialData: person})
     const is_auth = useIsAuth()
 
+    if (!data) return <>Такой записи нет</>
+
     return <div className="mt-10 space-y-6">
+        <div className="p-3 bg-indigo-600 rounded-xl text-center font-bold text-white">Черновик. Запись не видят пользователи</div>
         <div className="flex flex-col md:flex-row items-center">
             {data.photo && <img src={data.photo} className="w-[150px]"/>}
             <div className="ml-3 mt-4 md:mt-0">
-                <h1 className="font-bold text-3xl">{data.first_name} {data.last_name} {data.middle_name}</h1>
+                <h1 className="font-bold text-3xl">{data.last_name} {data.first_name} {data.middle_name}</h1>
                 <div className="font-medium text-xl">{data.date_of_birth.replaceAll('-', '.')} — {data.date_of_death.replaceAll('-', '.')}</div>
                 <div className="font-normal text-xl">Участник <span className="font-medium">{data.armed_conflict.title}</span></div>
                 <div className="mt-3 flex space-x-1">
-                    <ButtonUI text="Скачать"/>
                     <Print person={data}/>
                     {is_auth && <ButtonUI href={`/person/${data.id}/edit`} text="Редактировать"/>}
                 </div>

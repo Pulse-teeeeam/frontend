@@ -31,6 +31,7 @@ export interface IPerson {
     biography?: string | null;
     armed_conflict: IArmedConflict | number;
     photo?: string;
+    public: boolean
 }
 
 export interface IArmedConflictsList {

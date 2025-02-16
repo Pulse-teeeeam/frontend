@@ -9,7 +9,7 @@ interface IItem {
 
 interface InputUiProps {
     items: IItem[];
-    item?: IItem | undefined
+    item?: IItem | undefined | null
     title?: string | ReactNode;
     description?: string | ReactNode;
     placeholder?: string;
@@ -25,7 +25,7 @@ export default function SelectUi({items, item = undefined, title = '', descripti
 
   useEffect(() => {
     if (selectedPerson === false) {
-      if (item == undefined) {
+      if (item === undefined) {
         setSelectedPerson(items[0])
       } else {
         setSelectedPerson(item)

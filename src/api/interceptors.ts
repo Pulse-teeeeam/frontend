@@ -1,5 +1,5 @@
+'use client'
 import axios, { AxiosError, type CreateAxiosDefaults } from "axios";
-
 
 const options: CreateAxiosDefaults = {
     baseURL: process.env.NEXT_PUBLIC_BASE_SERVER_URL_API_PUBLIC,
@@ -9,7 +9,14 @@ const options: CreateAxiosDefaults = {
     }
 }
 
-const axiosClassic = axios.create(options)
-const axiosWithAuth = axios.create(options)
+export const axiosClassic = axios.create(options)
 
-export { axiosClassic, axiosWithAuth }
+axiosClassic.interceptors.request.use(async config => {
+    if (typeof window !== 'undefined') {
+        const token = localStorage.getItem('token')
+        if (token) {
+            config.headers.Authorization = `Token ${token}`
+        }
+        return config
+    }
+})

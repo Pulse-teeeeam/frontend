@@ -6,7 +6,7 @@ import PersonCount from "./components/PersonCount";
 import MovingText from "./components/MovingText";
 
 export default function Home() {
-  return <div className="space-y-8">
+  return <div className="space-y-20">
     <div className="h-[60svh] flex flex-col justify-center">
       <div className="flex justify-center md:justify-between items-center">
         <div className="block md:hidden absolute -z-10">
@@ -30,15 +30,15 @@ export default function Home() {
       </div>
     </Link>
     </div>
+    <MovingText/>
     <div className="mx-auto max-w-screen-xl bg-white text-black px-8 py-8 rounded-xl grid md:grid-cols-[35%_65%] ring-1 ring-inset ring-zinc-200" id="form-find">
       <h3 className="text-4xl font-medium mb-6 text-center md:text-left md:mb-0">Найти своего<br className="hidden md:block"/> героя</h3>
       <div className="space-y-3">
         <InputUI title="Имя"/>
         <InputUI title="Фамилия"/>
-        <ButtonUI text="Поиск" className="mt-3 w-full"/>
+        <ButtonUI text="Поиск" className="mt-3 w-full" href={'/filter'}/>
       </div>
     </div>
-    <MovingText/>
     <PersonCount/>
     </div>
 }

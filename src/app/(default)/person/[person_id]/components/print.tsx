@@ -23,7 +23,7 @@ export default function Print({person}: {person: IPerson}) {
                         <img src={person.photo} className="max-w-[180px]"/>
                     </div>
                     <div className="ml-3">
-                        <h1 className="font-bold text-5xl font-caveat">{person.first_name} {person.last_name} {person.middle_name}</h1>
+                        <h1 className="font-bold text-5xl font-caveat">{person.last_name} {person.first_name} {person.middle_name}</h1>
                         <div className="font-bold text-3xl font-caveat">{person.date_of_birth.replaceAll('-', '.')} — {person.date_of_death.replaceAll('-', '.')}</div>
                         <div className="font-medium text-3xl font-caveat">Участник <span className="font-bold">{person.armed_conflict.title}</span></div>
                     </div>
@@ -39,7 +39,7 @@ export default function Print({person}: {person: IPerson}) {
                         <img src={person.photo} className="max-w-[180px]"/>
                     </div>
                     <div className="ml-3">
-                        <h1 className="font-bold text-5xl font-caveat">{person.first_name} {person.last_name} {person.middle_name}</h1>
+                        <h1 className="font-bold text-5xl font-caveat">{person.last_name} {person.first_name} {person.middle_name}</h1>
                         <div className="font-bold text-4xl font-caveat">{person.date_of_birth.replaceAll('-', '.')} — {person.date_of_death.replaceAll('-', '.')}</div>
                         <div className="font-medium text-3xl font-caveat">Участник <span className="font-bold">{person.armed_conflict.title}</span></div>
                     </div>

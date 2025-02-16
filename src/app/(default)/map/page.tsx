@@ -1,35 +1,42 @@
-// export default function PageMap() {
-//     return <>
-//         <iframe id='nextgis-iframe' src="https://geois2.orb.ru/resource/8898/display/tiny?base=basemap_0&lon=56.0944&lat=52.4383&angle=0&zoom=11&styles=8801%2C7986%2C7975%2C2092&linkMainMap=true&events=true&panel=none&controls=zo%2Czi%2Cma%2Cmd&panels=" className="w-screen h-screen md:w-full md:h-full overflow-hidden mt-8 md:rounded-2xl"></iframe>
-//     </>
-// }
-
-
 'use client'
-
-import { useEffect } from 'react';
+import Script from "next/script"
+import geo_borders from './9.json'
 
 export default function PageMap() {
-  useEffect(() => {
-    const script = document.createElement('script');
-    script.src = "https://unpkg.com/@nextgis/ngw-leaflet@3.0.0-alpha.16/lib/ngw-leaflet.global.prod.js";
-    script.async = true;
-    // script.onload = () => {
-    //   if (window.NgwMap) {
-    //     new window.NgwMap({
-    //       baseUrl: 'https://geois2.orb.ru/resource/8898/display?base=basemap_0&lon=56.0935&lat=52.4135&angle=0&zoom=10&styles=8801,7986,7975,2092',
-    //       target: 'map',
-    //       qmsId: [448, 'baselayer'],
-    //     });
-    //   }
-    // };
+  const initYmaps = () => {
+    if (typeof ymaps !== "undefined") {
+      var myMap = new ymaps.Map("map", {
+        center: [51.768202, 55.096996],
+        zoom: 10,
+      });
+  
+      console.log(geo_borders);
+      geo_borders.features.forEach((feature) => {
+        const polygon = new ymaps.GeoObject(
+          {
+            geometry: {
+              type: "Polygon",
+              coordinates: feature.geometry.coordinates[0],
+            },
+            properties: {hintContent: feature.properties.name},
+          }
+        );
+        myMap.geoObjects.add(polygon);
+        console.log(polygon)
+      });
+    } else {
+      console.error("Yandex Maps API not loaded");
+    }
+  };
+  
 
-    document.body.appendChild(script);
-
-    return () => {
-      document.body.removeChild(script);
-    };
-  }, []);
-
-  return <div id="map" style={{ width: '100%', height: '500px' }} />;
+  return (
+    <>
+      <Script
+        onLoad={() => ymaps.ready(initYmaps)}
+        src={`https://api-maps.yandex.ru/2.1/?apikey=06839ef3-ad7a-480e-8499-e1818b1c744c&lang=ru_RU`}
+      />
+      <div id="map" className="w-full h-full"></div>
+    </>
+  );
 }

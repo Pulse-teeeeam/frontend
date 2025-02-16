@@ -10,7 +10,7 @@ import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
 export default function TabInformation() {
-    const { register, handleSubmit, setValue } = useForm<IPerson>();
+    const { register, handleSubmit, setValue, formState: { errors } } = useForm<IPerson>();
     const { data: items_data } = useQuery({queryKey: ['TabInformation'], queryFn: () => personService.armedConflictsList()})
     
     const onSubmit = async (person: IPerson) => {
@@ -27,22 +27,22 @@ export default function TabInformation() {
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
             <div className="flex flex-col md:grid grid-cols-3 md:flex-row bg-white px-5 py-5 rounded-xl my-3 gap-5">
-                <InputUi placeholder="Иванов" title="Фамилия" func={register('last_name')} />
-                <InputUi placeholder="Иван" title="Имя" func={register('first_name')} />
+                <InputUi placeholder="Иванов" title="Фамилия" func={register('last_name', {required: true})} description={errors.last_name && <span className="text-red-500">Обязательно к заполнению</span>}/>
+                <InputUi placeholder="Иван" title="Имя" func={register('first_name', {required: true})} description={errors.first_name && <span className="text-red-500">Обязательно к заполнению</span>}/>
                 <InputUi placeholder="Отчество (Не обязательно)" title="Отчество" func={register('middle_name')} />
             </div>
             <div className="flex flex-col md:grid grid-cols-3 md:flex-row bg-white px-5 py-5 rounded-xl my-3 gap-5">
-                <InputUi placeholder="Ввод..." title="Наименование военного комиссариата" func={register('military_commissariat')} />
-                <InputUi placeholder="Ввод..." title="Воинское звание" func={register('military_rank')} />
+                <InputUi placeholder="Ввод..." title="Наименование военного комиссариата" func={register('military_commissariat', {required: true})} description={errors.military_commissariat && <span className="text-red-500">Обязательно к заполнению</span>}/>
+                <InputUi placeholder="Ввод..." title="Воинское звание" func={register('military_rank', {required: true})} description={errors.military_rank && <span className="text-red-500">Обязательно к заполнению</span>}/>
                 <SelectUi items={items_data} title='Конфликт' func={(item: number) => {
                     if (item) {setValue('armed_conflict', item.id)}
                 }}/>
             </div>
             <div className="flex flex-col md:grid grid-cols-2 md:flex-row bg-white px-5 py-5 rounded-xl my-3 gap-5">
-                <InputUi placeholder="Ввод..." title="Дата рождения" func={register('date_of_birth')} type="date"/>
-                <InputUi placeholder="Ввод..." title="Место рождения" func={register('place_of_birth')} />
-                <InputUi placeholder="Ввод..." title="Дата смерти" func={register('date_of_death')} type="date"/>
-                <InputUi placeholder="Ввод..." title="Место захоронения" func={register('burial_place')} />                
+                <InputUi placeholder="Ввод..." title="Дата рождения" func={register('date_of_birth', {required: true})} type="date" description={errors.date_of_birth && <span className="text-red-500">Обязательно к заполнению</span>}/>
+                <InputUi placeholder="Ввод..." title="Место рождения" func={register('place_of_birth', {required: true})} description={errors.place_of_birth && <span className="text-red-500">Обязательно к заполнению</span>}/>
+                <InputUi placeholder="Ввод..." title="Дата смерти" func={register('date_of_death', {required: true})} type="date" description={errors.date_of_death && <span className="text-red-500">Обязательно к заполнению</span>}/>
+                <InputUi placeholder="Ввод..." title="Место захоронения" func={register('burial_place', {required: true})} description={errors.burial_place && <span className="text-red-500">Обязательно к заполнению</span>}/>                
             </div>
             <div className="flex flex-col bg-white px-5 py-5 rounded-xl my-3 gap-2">
                 <label className="text-sm font-medium text-left">Биография</label>
