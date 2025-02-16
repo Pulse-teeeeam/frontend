@@ -13,7 +13,7 @@ class PersonService {
         return <IPerson>(await axiosClassic.post(`${this.BASE_URL}create/`, person)).data
     }
 
-    async update(personId: number, person: IPerson): Promise<IPerson> {
+    async update(personId: number, person: Partial<IPerson>): Promise<IPerson> {
         return <IPerson>(await axiosClassic.patch(`${this.BASE_URL}update/${personId}/`, person)).data
     }
 

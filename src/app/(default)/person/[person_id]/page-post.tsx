@@ -21,7 +21,7 @@ export default function PagePersonPost({ person, person_id }: { person: IPerson 
             <div className="ml-3 mt-4 md:mt-0">
                 <h1 className="font-bold text-3xl">{data.last_name} {data.first_name} {data.middle_name}</h1>
                 <div className="font-medium text-xl">{data.date_of_birth.replaceAll('-', '.')} — {data.date_of_death.replaceAll('-', '.')}</div>
-                <div className="font-normal text-xl">Участник <span className="font-medium">{data.armed_conflict.title}</span></div>
+                {typeof data.armed_conflict !== "number" && <div className="font-normal text-xl">Участник <span className="font-medium">{data.armed_conflict.title}</span></div>}
                 <div className="mt-3 flex space-x-1">
                     <Print person={data}/>
                     {is_auth && <ButtonUI href={`/person/${data.id}/edit`} text="Редактировать"/>}

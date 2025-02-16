@@ -1,8 +1,10 @@
 import { getPerson } from "@/lib/serverRequest"
 import PagePersonPost from "./page-post"
 
-export default async function page({params}: {params: {person_id: number}}) {
-    const {person_id} = await params
+type tParams = Promise<{ person_id: number }>;
+
+export default async function Challenge(props: { params: tParams }) {
+    const { person_id } = await props.params;
     let person;
     try {
         person = await getPerson(person_id);

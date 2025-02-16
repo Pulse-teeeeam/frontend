@@ -17,6 +17,6 @@ axiosClassic.interceptors.request.use(async config => {
         if (token) {
             config.headers.Authorization = `Token ${token}`
         }
-        return config
     }
+    return config
 })

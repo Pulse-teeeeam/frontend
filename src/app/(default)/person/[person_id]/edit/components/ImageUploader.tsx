@@ -7,7 +7,7 @@ import { toast } from "sonner";
 export default function ImageUploader({person}: {person: IPerson}) {
     const queryClient = useQueryClient();
 
-    const handleFileChange = async (event) => {
+    const handleFileChange = async (event: any) => {
         const file = event.target.files[0];
     
         if (file) {
@@ -24,9 +24,7 @@ export default function ImageUploader({person}: {person: IPerson}) {
 
     const deletePhoto = async () => {
         try {
-            await personService.update(person.id, {
-                photo: null
-            })
+            await personService.update(person.id, {photo: null})
             await queryClient.refetchQueries({queryKey: ['person_edit', person.id]})
             toast.success('Успешно удалено!');
         } catch (e) {

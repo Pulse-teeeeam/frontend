@@ -2,6 +2,8 @@
 import Script from "next/script"
 import geo_borders from './9.json'
 
+declare var ymaps: any;
+
 export default function PageMap() {
   const initYmaps = () => {
     if (typeof ymaps !== "undefined") {

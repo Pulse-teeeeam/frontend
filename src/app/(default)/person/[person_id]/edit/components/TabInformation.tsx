@@ -28,7 +28,9 @@ export default function TabInformation({person_data}: {person_data: IPerson}) {
     };
 
     useEffect(() => {
-        setValue('armed_conflict', person_data.armed_conflict?.id)
+        if (typeof person_data.armed_conflict !== "number") {
+            setValue('armed_conflict', person_data.armed_conflict.id)
+        }
     }, [])
 
     if (!items_data) return <>Loading</>
@@ -42,9 +44,19 @@ export default function TabInformation({person_data}: {person_data: IPerson}) {
             <div className="flex flex-col md:grid grid-cols-3 md:flex-row bg-white px-5 py-5 rounded-xl my-3 gap-5">
                 <InputUi placeholder="Ввод..." title="Наименование военного комиссариата" func={register('military_commissariat', {required: true})} description={errors.military_commissariat && <span className="text-red-500">Обязательно к заполнению</span>}/>
                 <InputUi placeholder="Ввод..." title="Воинское звание" func={register('military_rank', {required: true})} description={errors.military_rank && <span className="text-red-500">Обязательно к заполнению</span>}/>
-                <SelectUi items={items_data} title='Конфликт' item={person_data.armed_conflict} func={(item: number) => {
-                    if (item) {setValue('armed_conflict', item.id)}
-                }}/>
+                <SelectUi
+                    items={Array.isArray(items_data) ? items_data : Object.values(items_data)}
+                    title="Конфликт"
+                    item={typeof person_data.armed_conflict !== "number" 
+                        ? { id: person_data.armed_conflict.id, title: person_data.armed_conflict.title }
+                        : null
+                    }
+                    func={(item: {title: string, id: number}) => {
+                        if (item) {
+                            setValue('armed_conflict', item.id);
+                        }
+                    }}
+                />
             </div>
             <div className="flex flex-col md:grid grid-cols-2 md:flex-row bg-white px-5 py-5 rounded-xl my-3 gap-5">
                 <InputUi placeholder="Ввод..." title="Дата рождения" func={register('date_of_birth', {required: true})} type="date" description={errors.date_of_birth && <span className="text-red-500">Обязательно к заполнению</span>}/>

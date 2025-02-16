@@ -30,7 +30,7 @@ export interface IPerson {
     burial_place: string;
     biography?: string | null;
     armed_conflict: IArmedConflict | number;
-    photo?: string;
+    photo?: string | null;
     public: boolean
 }
 

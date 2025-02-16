@@ -19,13 +19,13 @@ export default function Print({person}: {person: IPerson}) {
             <img src={'/sheets/sheet-1.jpg'} className="w-full h-full object-cover" />
             <div className="absolute top-0 left-0 z-20 text-black p-6">
                 <div className="flex">
-                    <div>
+                    {person.photo && <div>
                         <img src={person.photo} className="max-w-[180px]"/>
-                    </div>
+                    </div>}
                     <div className="ml-3">
                         <h1 className="font-bold text-5xl font-caveat">{person.last_name} {person.first_name} {person.middle_name}</h1>
                         <div className="font-bold text-3xl font-caveat">{person.date_of_birth.replaceAll('-', '.')} — {person.date_of_death.replaceAll('-', '.')}</div>
-                        <div className="font-medium text-3xl font-caveat">Участник <span className="font-bold">{person.armed_conflict.title}</span></div>
+                        <div className="font-medium text-3xl font-caveat">Участник <span className="font-bold">{typeof person.armed_conflict !== "number" && person.armed_conflict.title}</span></div>
                     </div>
                 </div>
                 <img src="https://cdn.culture.ru/images/ade6626a-a9de-5a81-a610-334fee39c61a"/>
@@ -35,13 +35,13 @@ export default function Print({person}: {person: IPerson}) {
             <img src={'/sheets/sheet-1.jpg'} className="w-full h-full object-cover" />
             <div className="absolute top-0 left-0 z-20 text-black p-6">
                 <div className="flex">
-                    <div>
+                    {person.photo && <div>
                         <img src={person.photo} className="max-w-[180px]"/>
-                    </div>
+                    </div>}
                     <div className="ml-3">
                         <h1 className="font-bold text-5xl font-caveat">{person.last_name} {person.first_name} {person.middle_name}</h1>
                         <div className="font-bold text-4xl font-caveat">{person.date_of_birth.replaceAll('-', '.')} — {person.date_of_death.replaceAll('-', '.')}</div>
-                        <div className="font-medium text-3xl font-caveat">Участник <span className="font-bold">{person.armed_conflict.title}</span></div>
+                        <div className="font-medium text-3xl font-caveat">Участник <span className="font-bold">{typeof person.armed_conflict !== "number" && person.armed_conflict.title}</span></div>
                     </div>
                 </div>
                 <img src="https://cdn.culture.ru/images/ade6626a-a9de-5a81-a610-334fee39c61a"/>

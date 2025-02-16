@@ -24,6 +24,8 @@ type FormValues = {
     military_rank: string;
     military_commissariat: string;
 
+    armed_conflict: number;
+
 }
 
 export default function SelectForm({personList, setPersonList}: {personList: IPerson[], setPersonList: any}) {
@@ -75,7 +77,7 @@ export default function SelectForm({personList, setPersonList}: {personList: IPe
                 <div className="space-y-3 bg-white px-5 py-5 rounded-xl ring-1 ring-inset ring-zinc-200">
                     <InputUi title='Дата рождения' type='date' func={register('date_of_birth')}/>
                     <InputUi title='Дата смерти' type='date' func={register('date_of_death')}/>
-                    <SelectUi items={items_data} title='Военный конфликт' item={null} func={(item: number) => {if (item) {setValue('armed_conflict', item.id)}}}/>
+                    <SelectUi items={Array.isArray(items_data) ? items_data : []} title='Военный конфликт' item={null} func={(item: {title: string, id: number}) => {if (item) {setValue('armed_conflict', item.id)}}}/>
                 </div>
                 <div className="space-y-3 bg-white px-5 py-5 rounded-xl ring-1 ring-inset ring-zinc-200">
                     <InputUi placeholder="Введите..." title="Место рождения" func={register('place_of_birth')}/>
