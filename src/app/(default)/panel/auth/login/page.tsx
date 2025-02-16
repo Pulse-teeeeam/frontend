@@ -35,6 +35,8 @@ export default function PageAuthLogin() {
             <InputUI placeholder="Юзернейм" func={register('username', {})}/>
             <InputUI placeholder="Пароль" func={register('password')} type="password"/>
             <ButtonUI text="Войти"/>
+            <div className="font-mono">ИЛИ</div>
+            <ButtonUI text="Войти через ЕЛК" theme="outline" href={process.env.NEXT_PUBLIC_BASE_SERVER_URL_API_PUBLIC + '/auth/ELC/generate'}/>
         </div>
     </form>;
 }
