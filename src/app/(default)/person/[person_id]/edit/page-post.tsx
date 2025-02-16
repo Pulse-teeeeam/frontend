@@ -9,7 +9,7 @@ import Link from "next/link";
 import React from "react";
 
 export default function PageEditPersonPost({ person_id }: {person_id: number}) {
-    const { data } = useQuery({ queryKey: ['person_edit', person_id], queryFn: () => personService.getDetail(person_id) });
+    const { data } = useQuery({ queryKey: ['person_edit', Number(person_id)], queryFn: () => personService.getDetail(person_id) });
 
     if (!data) return <>Data</>;
 

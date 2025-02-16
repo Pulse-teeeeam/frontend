@@ -1,6 +1,6 @@
 'use client'
 import { axiosClassic } from "@/api/interceptors"
-import { IArmedConflictsList, IPerson } from "@/interfaces/Person.interface"
+import { IArmedConflictsList, IMedal, IPerson } from "@/interfaces/Person.interface"
 
 class PersonService {
     private BASE_URL = '/person/'
@@ -31,6 +31,10 @@ class PersonService {
 
     async armedConflictsList(): Promise<IArmedConflictsList> {
         return <IArmedConflictsList>(await axiosClassic.get(`${this.BASE_URL}armed_conflicts_list/`)).data
+    }
+
+    async medalsList(): Promise<IMedal> {
+        return <IMedal>(await axiosClassic.get(`${this.BASE_URL}medals_list/`)).data
     }
 }
 

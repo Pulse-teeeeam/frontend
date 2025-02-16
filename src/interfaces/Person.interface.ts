@@ -24,7 +24,7 @@ export interface IPerson {
     place_of_birth: string;
     military_commissariat: string;
     military_rank: string;
-    medals: IMedal[];
+    medals: IMedal[] | number[];
     files: IFile[],
     date_of_death: string; // ISO 8601 date format (YYYY-MM-DD)
     burial_place: string;

@@ -18,6 +18,7 @@ export default function TabInformation({person_data}: {person_data: IPerson}) {
     
     const onSubmit = async (person: IPerson) => {
         console.log("Form:", person);
+        delete person.photo;
         try {
             const data = await personService.update(person_data.id, person)
             toast.success('Успешно обновлено!')
@@ -72,7 +73,7 @@ export default function TabInformation({person_data}: {person_data: IPerson}) {
                     className="block appearance-none rounded-lg border-none px-4 py-2.5 transition focus:outline-none ring-1 ring-inset focus:ring-2 focus:ring-inset focus:ring-indigo-600 text-black bg-zinc-50 focus:bg-zinc-100 ring-zinc-300 hover:ring-zinc-400 placeholder:text-zinc-600"
                 />
             </div>
-            <ButtonUi text="Сохранить " className="w-full" type="submit"/>
+            <ButtonUi text="Сохранить" className="w-full" type="submit"/>
         </form>
     );
 }

@@ -38,7 +38,7 @@ export default function ImageUploader({person}: {person: IPerson}) {
         <div className="bg-white rounded-xl px-5 py-5">
             <label className="text-sm font-medium text-left">Главное фото</label>
             {person.photo ? 
-                <img src={person.photo} className="w-max h-max hover:invert cursor-pointer" onClick={deletePhoto}/>
+                <img src={person.photo} className="w-max h-max hover:invert cursor-pointer rounded-md mt-1" onClick={deletePhoto}/>
             : 
                 <label htmlFor="dropzone-file" className="flex flex-col justify-center items-center text-center hover:bg-indigo-100 h-48 mt-6 rounded-xl cursor-pointer border-2 border-dashed border-gray-300">
                     <IoMdAdd className="w-24 h-24 text-gray-400" />

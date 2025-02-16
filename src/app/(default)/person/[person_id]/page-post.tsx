@@ -34,7 +34,7 @@ export default function PagePersonPost({ person, person_id }: { person: IPerson 
                     <h3 className="font-bold text-2xl">Медали</h3>
                     <div className="flex gap-3 mt-6">
                         {data.medals.map((medal) => 
-                            <div className="bg-zinc-50 p-4 rounded-xl flex flex-col items-center" key={medal.id}>
+                            typeof medal === "object" && <div className="bg-zinc-50 p-4 rounded-xl flex flex-col items-center" key={medal.id}>
                                 <img className="h-42" src={medal.image} alt={medal.title}/>
                                 <div className="mt-3 font-bold">{medal.title}</div>
                             </div>
@@ -57,8 +57,10 @@ export default function PagePersonPost({ person, person_id }: { person: IPerson 
             </div>
             {data.biography && <div className="p-5 bg-white rounded-xl ring-1 ring-inset ring-zinc-200">
                 <h3 className="font-bold text-2xl">Биография</h3>
-                <div className="mt-1">
-                    {data.biography}
+                <div className="mt-1 space-y-2">
+                    {data.biography.split('\n').map((line, index) => (
+                        <p key={index}>{line}</p>
+                    ))}
                 </div>
             </div>}
             {data.files.length != 0 && <div className="p-5 bg-white rounded-xl ring-1 ring-inset ring-zinc-200">
