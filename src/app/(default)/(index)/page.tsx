@@ -15,7 +15,7 @@ export default function Home() {
         <div className="space-y-3 text-center md:text-left bg-white/80 backdrop-blur-2xl p-6 rounded-2xl md:bg-zinc-100">
           <h1 className="font-bold text-4xl text-black">Цифровая книга памяти<br/>Оренбургской области</h1>
           <h3 className="text-xl text-black/80">Никто не забыт, ничто не забыто</h3>
-          <ButtonUI text="Открыть книгу" className="w-full md:w-42"/>
+          <ButtonUI text="Открыть книгу" className="w-full md:w-42" href={'/filter'}/>
         </div>
         <div className="hidden md:block">
           <Image src="/banner.jpg" alt='' className="rounded-2xl" width={600} height={600}/>
