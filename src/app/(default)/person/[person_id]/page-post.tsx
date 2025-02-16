@@ -15,7 +15,7 @@ export default function PagePersonPost({ person, person_id }: { person: IPerson 
     if (!data) return <>Такой записи нет</>
 
     return <div className="mt-10 space-y-6">
-        <div className="p-3 bg-indigo-600 rounded-xl text-center font-bold text-white">Черновик. Запись не видят пользователи</div>
+        {!data.public && <div className="p-3 bg-indigo-600 rounded-xl text-center font-bold text-white">Черновик. Запись не видят пользователи</div>}
         <div className="flex flex-col md:flex-row items-center">
             {data.photo && <img src={data.photo} className="w-[150px]"/>}
             <div className="ml-3 mt-4 md:mt-0">
