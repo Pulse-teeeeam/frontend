@@ -17,7 +17,7 @@ export default function FilterPage({}) {
                 <div className="text-center font-semibold text-2xl">Ничего не найдено :(</div>
             :
                 <div className="flex flex-col gap-1">
-                {personList.map((person) => <>
+                {personList && personList.map((person) => <>
                     <Link href={`/person/${person.id}`} className="bg-zinc-50 hover:bg-indigo-50 rounded-xl p-3">
                         <div className="font-semibold text-xl">{person.last_name} {person.first_name} {person.middle_name} {!person.public && <span className="font-bold text-zinc-300">(Черновик)</span>}</div>
 
