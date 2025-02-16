@@ -31,14 +31,20 @@ export default function SelectUi({
   type = undefined,
   color = 'base',
 }: InputUiProps) {
-  // Initialize selectedPerson with either the first item or the passed item
+  if (item === undefined) {
+    item = items[0]
+  }
+
   const [selectedPerson, setSelectedPerson] = useState<{ id: number; title: string } | null>(
-    item ?? items[0] ?? null
+    item
   )
+  console.log(selectedPerson)
   const [query, setQuery] = useState('')
 
   useEffect(() => {
-    func(selectedPerson)  // Passing the selected person object
+    if (selectedPerson !== null) {
+      func(selectedPerson)
+    }
   }, [selectedPerson, func])
 
   const filteredPeople =

@@ -17,6 +17,9 @@ export default function TabInformation() {
         console.log("Form submitted:", person);
         try {
             const data = await personService.create(person)
+            if (typeof window !== 'undefined' && data?.id) {
+                window.location.href = `/person/${data.id}`;
+            } 
         } catch (e) {
             toast.error(`Ошибка - ${e}`)
             console.log(e)
