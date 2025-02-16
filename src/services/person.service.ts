@@ -36,6 +36,10 @@ class PersonService {
     async medalsList(): Promise<IMedal> {
         return <IMedal>(await axiosClassic.get(`${this.BASE_URL}medals_list/`)).data
     }
+
+    async generateText(personId: number): Promise<{text: string}> {
+        return <{text: string}>(await axiosClassic.post(`${this.BASE_URL}get/${personId}/generate`)).data
+    }
 }
 
 export default new PersonService()

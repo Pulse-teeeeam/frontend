@@ -7,6 +7,7 @@ import { useQuery } from "@tanstack/react-query";
 import { IoCaretBack } from "react-icons/io5";
 import Link from "next/link";
 import React from "react";
+import TabTextGenerate from "./components/TabTextGenerate";
 
 export default function PageEditPersonPost({ person_id }: {person_id: number}) {
     const { data } = useQuery({ queryKey: ['person_edit', Number(person_id)], queryFn: () => personService.getDetail(person_id) });
@@ -21,13 +22,15 @@ export default function PageEditPersonPost({ person_id }: {person_id: number}) {
             </h1>
 
             <TabGroup className={'mt-3'}>
-                <TabList className={'w-full grid grid-cols-2 bg-white rounded-2xl p-2 gap-1'}>
+                <TabList className={'w-full grid grid-cols-3 bg-white rounded-2xl p-2 gap-1'}>
                     <Tab className={'data-[selected]:bg-indigo-600 data-[hover]:bg-indigo-600/15 data-[selected]:text-white p-2 rounded-md'}>Информация</Tab>
                     <Tab className={'data-[selected]:bg-indigo-600 data-[hover]:bg-indigo-600/15 data-[selected]:text-white p-2 rounded-md'}>Файлы и медали</Tab>
+                    <Tab className={'data-[selected]:bg-indigo-600 data-[hover]:bg-indigo-600/15 data-[selected]:text-white p-2 rounded-md'}>Генерация текста</Tab>
                 </TabList>
                 <TabPanels>
                     <TabPanel><TabInformation person_data={data} /></TabPanel>
                     <TabPanel><TabFiles person_data={data} /></TabPanel>
+                    <TabPanel><TabTextGenerate person_data={data} /></TabPanel>
                 </TabPanels>
             </TabGroup>
         </div>
