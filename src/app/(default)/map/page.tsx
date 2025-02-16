@@ -1,36 +1,5 @@
-'use client'
-import Script from "next/script"
-import { useEffect } from "react";
-
-declare var NgwMap: any;
-
 export default function PageMap() {
-  const initYmaps = () => {
-    NgwMap.create({
-      baseUrl: 'https://geois2.orb.ru/resource/8800',
-      target: 'map',
-      center: [51.768205, 55.097000],
-      auth: {
-          login: "hackathon_25",
-          password: "hackathon_25_25"
-      },
-      zoom: 12,
-      adapterOptions: {
-          selectable: !0
-      }
-    });
-
-  };
-
-
-  return (
-    <>
-      <Script
-        src={`https://unpkg.com/@nextgis/ngw-maplibre-gl`}
-        onLoad={() => initYmaps()}
-        onError={() => console.error("Script failed to load")}
-      />
-      <div id="map" className="w-full h-full" style={{ height: '500px' }}></div>
+    return <>
+        <iframe id='nextgis-iframe' src="https://geois2.orb.ru/resource/8898/display/tiny?base=basemap_0&lon=56.0944&lat=52.4383&angle=0&zoom=11&styles=8801%2C7986%2C7975%2C2092&linkMainMap=true&events=true&panel=none&controls=zo%2Czi%2Cma%2Cmd&panels=" className="w-screen h-screen md:w-full md:h-full overflow-hidden mt-8 md:rounded-2xl"></iframe>
     </>
-  );
 }
